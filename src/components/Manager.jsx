@@ -22,20 +22,24 @@ const Manager = () => {
         setpasswordArray([...passwordArray,{...form, id:uuidv4()}])
         localStorage.setItem('passwords', JSON.stringify([...passwordArray,{...form, id:uuidv4()}]))
         console.log([...passwordArray, form])
-
+        setform({ site: '', username: '', password: '' })
 
     }
     const deletePassword = (id) => {
             console.log("Deleting Password", id)
-        setpasswordArray(passwordArray.filter(item=>item.id!==id))
-        localStorage.setItem('passwords', JSON.stringify(passwordArray.filter(item=>item.id!==id)))
-        // console.log([...passwordArray, form])
+      
+        let confirm = window.confirm("Are you sure you want to delete this password?")
+        if(confirm){
+            setpasswordArray(passwordArray.filter(item=>item.id!==id))
+            localStorage.setItem('passwords', JSON.stringify(passwordArray.filter(item=>item.id!==id)))
+        }
 
 
     }
     const editPassword = (id) => {
-            console.log("Editing Password", id)
-    }
+            setform(passwordArray.filter(i=>i.id===id)[0])
+            setpasswordArray(passwordArray.filter(item=>item.id!==id))
+        }
 
     const handleChange = (e) => {
         setform({ ...form, [e.target.name]: e.target.value })
@@ -136,7 +140,7 @@ const Manager = () => {
                             {passwordArray.map((item, index) => {
                                 return <tr key={index}>
                                     <td className="flex items-center justify-center text-center border px-4 py-2 gap-2"><a href={item.site}>{item.site}</a>
-                                        <div className="lordiconcopy size-7 cursor-pointer item-center justify-center"
+                                        <div className="lordiconcopy size-7 cursor-pointer item-center justify-center py-1"
 
                                             onClick={() => { notify(item.site) }}>
 
@@ -155,7 +159,7 @@ const Manager = () => {
                                             <span>
                                                 {item.username}
                                             </span>
-                                            <div className="lordiconcopy size-7 cursor-pointer item-center justify-center" onClick={() => { notify(item.username) }}>
+                                            <div className="lordiconcopy size-7 cursor-pointer item-center justify-center py-1" onClick={() => { notify(item.username) }}>
                                                 <ToastContainer
                                                     position="top-right"
                                                     autoClose={5000}
@@ -183,7 +187,7 @@ const Manager = () => {
                                             <span>
                                                 {item.password}
                                             </span>
-                                            <div className="lordiconcopy size-7 cursor-pointer item-center justify-center" onClick={() => { notify(item.password) }}>
+                                            <div className="lordiconcopy size-7 cursor-pointer item-center justify-center py-1" onClick={() => { notify(item.password) }}>
 
                                                 <lord-icon
                                                     style={{ "width": "25px", "height": "25px" }}
@@ -196,14 +200,14 @@ const Manager = () => {
 
                                     </td>
                                     <td className="text-center w-32 border px-4 py-2">
-                                        <span className='cursor-pointer mx-1' onClick = {()=>{editPassword(item.id)}}>
+                                        <span className='cursor-pointer mx-1 py-1' onClick = {()=>{editPassword(item.id)}}>
                                             <lord-icon 
                                             src = "https://cdn.lordicon.com/gwlusjdu.json"
                                             trigger = "hover"
                                             style = {{"width":"25px","height":"25px"}}>
                                             </lord-icon>
                                         </span>
-                                        <span className='cursor-pointer mx-1' onClick = {()=>{deletePassword(item.id)}} >
+                                        <span className='cursor-pointer mx-1 py-1' onClick = {()=>{deletePassword(item.id)}} >
                                             <lord-icon
                                                 src="https://cdn.lordicon.com/skkahier.json"
                                                 trigger="hover"
