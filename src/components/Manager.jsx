@@ -3,12 +3,23 @@ import { useState } from 'react'
 const Manager = () => {
     const [form, setform] = useState({site: '', username: '', password: ''})
     const [passwordArray, setpasswordArray] = useState([])
+
+    useEffect(() => {
+        let passwords = localStorage.getItem('passwords')
+        if(passwords){
+          setpasswordArray(JSON.parse(passwords))
+        }
+    }, [])
     
     
     
 
     const savePassword = () => {
       console.log(form);
+
+      setpasswordArray([...passwordArray, form])
+      console.log(passwordArray)
+      
      
     }
     
