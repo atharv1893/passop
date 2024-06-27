@@ -15,6 +15,8 @@ const Navbar = () => {
                 <a className = 'hover:font-bold text-white'  href='#home'>About</a>
                 <a className = 'hover:font-bold text-white' href='#home'>Contact</a>
             </li>
+
+            
         </ul>
     </nav>
   )
