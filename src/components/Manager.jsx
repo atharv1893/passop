@@ -25,13 +25,16 @@ const Manager = () => {
 
 
     }
-    const deletePassword = () => {
-
-        // setpasswordArray([...passwordArray,{form, id:uuidv4()}])
-        // localStorage.setItem('passwords', JSON.stringify([...passwordArray, form]))
+    const deletePassword = (id) => {
+            console.log("Deleting Password", id)
+        setpasswordArray(passwordArray.filter(item=>item.id!==id))
+        localStorage.setItem('passwords', JSON.stringify(passwordArray.filter(item=>item.id!==id)))
         // console.log([...passwordArray, form])
 
 
+    }
+    const editPassword = (id) => {
+            console.log("Editing Password", id)
     }
 
     const handleChange = (e) => {
@@ -193,14 +196,14 @@ const Manager = () => {
 
                                     </td>
                                     <td className="text-center w-32 border px-4 py-2">
-                                        <span className='cursor-pointer mx-1'>
+                                        <span className='cursor-pointer mx-1' onClick = {()=>{editPassword(item.id)}}>
                                             <lord-icon 
                                             src = "https://cdn.lordicon.com/gwlusjdu.json"
                                             trigger = "hover"
                                             style = {{"width":"25px","height":"25px"}}>
                                             </lord-icon>
                                         </span>
-                                        <span className='cursor-pointer mx-1'>
+                                        <span className='cursor-pointer mx-1' onClick = {()=>{deletePassword(item.id)}} >
                                             <lord-icon
                                                 src="https://cdn.lordicon.com/skkahier.json"
                                                 trigger="hover"
