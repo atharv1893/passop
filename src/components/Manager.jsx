@@ -89,7 +89,7 @@ const Manager = () => {
                         placeholder='Enter Website URL'
                         onChange={handleChange}
                     />
-                    <div className="flex w-full justify-between gap-8">
+                    <div className="flex flex-col md:flex-row w-full justify-between gap-8">
 
                         <input
                             type="text"
